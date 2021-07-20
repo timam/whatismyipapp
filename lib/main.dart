@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:animated_background/animated_background.dart';
 
 
 Future<ShowPublicIP> fetchPublicIP() async {
@@ -62,18 +61,28 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body: Center(
-          child: FutureBuilder<ShowPublicIP>(
-            future: futureAlbum,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data!.publicIP);
-              } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              // By default, show a loading spinner.
-              return CircularProgressIndicator();
-            },
+        body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Color.fromRGBO(18, 19, 19, 1.0),
+                    Color.fromRGBO(165, 173, 184, 1.0)
+                  ])),
+          child: Center(
+            child: FutureBuilder<ShowPublicIP>(
+              future: futureAlbum,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text("YOUR PUBLIC IP ADDRESS IS: " + snapshot.data!.publicIP);
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                // By default, show a loading spinner.
+                return CircularProgressIndicator();
+              },
+            ),
           ),
         ),
       ),
