@@ -4,10 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 Future<ShowPublicIP> fetchPublicIP() async {
   final response =
-  await http.get(Uri.parse('https://whatismyip-api.herokuapp.com/'));
+      await http.get(Uri.parse('https://whatismyip-api.herokuapp.com/'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -21,7 +20,6 @@ Future<ShowPublicIP> fetchPublicIP() async {
 }
 
 class ShowPublicIP {
-
   final String publicIP;
 
   ShowPublicIP({
@@ -67,15 +65,30 @@ class _MyAppState extends State<MyApp> {
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
-                    Color.fromRGBO(18, 19, 19, 1.0),
-                    Color.fromRGBO(165, 173, 184, 1.0)
-                  ])),
+                Color.fromRGBO(0, 0, 0, 1.0),
+                Color.fromRGBO(0, 0, 0, 1.0)
+              ])),
           child: Center(
             child: FutureBuilder<ShowPublicIP>(
               future: futureAlbum,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text("YOUR PUBLIC IP ADDRESS IS: " + snapshot.data!.publicIP);
+                  // return Text(snapshot.data!.publicIP);
+                  return Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                      Text(
+                        snapshot.data!.publicIP,
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 100,),
+                      ),
+                      Text(
+                        "IS YOUR PUBLIC IP ADDRESS",
+                        style: TextStyle(color: Colors.white,  fontSize: 30,),
+                      ),
+                    ]),
+                  );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
