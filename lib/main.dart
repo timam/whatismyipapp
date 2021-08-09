@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 Future<ShowPublicIP> fetchPublicIP() async {
   final response =
-      await http.get(Uri.parse('http://whatismyip-app:8080/'));
+      await http.get(Uri.parse('https://whatismyip-api.labs.bka.sh/'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
