@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'What is my IP?',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       home: Scaffold(
         body: Container(
